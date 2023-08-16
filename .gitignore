@@ -1,0 +1,9 @@
+.direnv/
+.envrc
+
+
+# ocaml / opam
+*.cmi
+*.cmx
+*.o
+*.exe
