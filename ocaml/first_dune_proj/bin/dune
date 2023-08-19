@@ -1,0 +1,4 @@
+(executable
+ (public_name first_dune_proj)
+ (name main)
+ (libraries first_dune_proj graphics ))

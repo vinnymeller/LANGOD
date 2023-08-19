@@ -13,7 +13,7 @@
 
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        ocamlPackages = pkgs.ocaml-ng.ocamlPackages_latest;
+        ocamlPackages = pkgs.ocaml-ng.ocamlPackages;
       in
       {
         formatter = pkgs.nixpkgs-fmt;
@@ -22,10 +22,13 @@
 
           buildInputs = with pkgs; [
             dune_3
+            opam
+            ocamlPackages.findlib
+            ocamlPackages.graphics
             ocamlPackages.ocaml
             ocamlPackages.utop
-            ocamlPackages.graphics
-            ocamlPackages.findlib
+
+            ocamlPackages.opium
           ];
         };
       }

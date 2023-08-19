@@ -2,8 +2,30 @@
 .envrc
 
 
-# ocaml / opam
+## OCaml stuff
+# dune
+_build/
+*.install
+
+# OPAM
+*.opam-switch/
+*.opam/
+
+# OCaml bytecode and native generated
 *.cmi
+*.cmo
+*.cma
 *.cmx
+*.cmxa
+*.a
 *.o
+
+# Executables
 *.exe
+
+# Merlin conf
+.merlin
+
+# OCamlDoc gen
+*.odoc
+*.mld
