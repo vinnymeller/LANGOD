@@ -114,6 +114,29 @@ let rec compress_ex = function
     | a :: (b :: _ as t) -> if a = b then compress_ex t else a :: compress_ex t
     | smaller -> smaller
 
+    (* 9 *)
+    (* TODO: what the fuck, go back over this one *)
+let pack list =
+    let rec aux current acc = function
+        | [] -> []  (* only way we ever get here i think is it start with empty list *)
+        | [ x ] -> (x :: current) :: acc (* when theres 1 element left prepend x to current, since current will be empty if in previous step x doesn't equal the letter that came before *)
+        | a :: (b :: _ as t) ->
+            if a = b then aux (a :: current) acc t (* when 0th element equals 1st, append a to current and pass this as current in next recursion. pass acc as acc and t as the working list *)
+            else aux [] ((a :: current) :: acc) t in (* a is different than b, so for next recursion pass empty list to current, prepend a to the current current, and prepend that list to acc *)
+    List.rev (aux [] [] list)
+
+
+    (* 10 *)
+let encode list = 
+    let rec aux current acc = function
+        | [] -> []
+        | [ x ] -> (current + 1, x) :: acc
+        | a :: (b :: _ as t) ->
+            if a = b then aux (current + 1) acc t
+            else aux 0 (((current + 1), a) :: acc) t
+    in List.rev (aux 0 [] list)
+
+
 let () =
     (* 1 *)
     let mine = Option.is_some (last_mine []) in ();
@@ -160,6 +183,12 @@ let () =
     let mine = compress ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e"] in
     let ex = compress_ex ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e"]  in
         check_equal string_of_bool (mine = ex) true;
+
+    let _ = pack ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "d"; "e"; "e"; "e"; "e"]
+        |> List.iter (List.iter print_endline) in ();
+
+    let _ = encode ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "d"; "e"; "e"; "e"; "e"] 
+        |> List.iter (fun (a, b) -> Printf.printf "(%s, %s)\n" (string_of_int a) b) in ();
 
 
 ;;
