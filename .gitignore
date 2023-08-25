@@ -29,3 +29,13 @@ _build/
 # OCamlDoc gen
 *.odoc
 *.mld
+
+## Haskell stuff
+# haskell
+*.hi
+*.o
+
+
+## Rust stuff
+# generated
+target/
