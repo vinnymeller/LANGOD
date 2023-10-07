@@ -1,8 +1,8 @@
 {
-  description = "OCaml dev environment";
+  description = "randomly thrown together dev environment for learning a bunch of languages";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -42,6 +42,9 @@
             # rust shit
             rustVersion
             rust-analyzer
+
+            # python
+            python312
 
           ];
         };
